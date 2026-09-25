@@ -1,0 +1,7 @@
+[[d1_databases]]
+binding = "DB" # available in your Worker on env.DB
+database_name = "supersecretdatabase"
+database_id = "e8e79e9b-7d9c-4f21-bac2-7fdc4d1bb364"
+
+
+pages_build_output_dir = "./dist"

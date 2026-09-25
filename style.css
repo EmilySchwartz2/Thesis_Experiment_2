@@ -1,0 +1,38 @@
+.consentFormDiv{
+max-width: 60vw; margin-top: 10vh; margin-bottom: 1vh;
+
+}
+
+.baseRateDiv {
+font-size:30px;
+line-height: 2; /* 1.5 times the font-size */
+max-width: 60vw;
+}
+
+.stereotypeDiv {
+font-size:30px;
+line-height: 2; /* 1.5 times the font-size */
+max-width: 60vw;
+
+}
+
+
+.participantResponseKeyNudge {
+    font-size: 25px;
+    color: gray
+}
+
+.participantResponseTable .divider {
+    width: 5vw;
+}
+
+
+.participantResponseTable .option {
+    width: 30vw;
+    text-align: center;
+}
+
+.audioPlayer {
+  display: none;
+}
+
