@@ -428,7 +428,6 @@ function check_trial_null() {
     }
   };
 
-
   const practiceprocedure = {
     timeline: [fixation, stereotype, baserate, participantResponse, timeout_conditional],
     timeline_variables: [
@@ -468,7 +467,7 @@ function check_trial_null() {
     html: `
     <div style="max-width: 60vw;">  
     <p>You will now begin the experimental trials.</p>
-      <p>These will be similar to the practice trials; however, after each initial decision, you will get the opportunity to rethink your decision for up to <strong>55 seconds</strong>.</p>
+      <p>These will be identical to the practice trials.</p>
       <p>Please press "Continue" when you are ready to proceed.<p/></div>`,
     button_label: "Continue",
   };
@@ -589,6 +588,49 @@ function check_trial_null() {
   };
 
   timeline.push(experimentalprocedure);
+  
+    // Attention check
+
+  // participant response with two options
+
+  var participantResponsecheck = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function () {
+      return participantResponseTemplate(
+        jsPsych.evaluateTimelineVariable('job'),  
+        jsPsych.evaluateTimelineVariable('name1'),
+        jsPsych.evaluateTimelineVariable('name2')  
+      );
+    },
+      
+    choices: ['f', 'j', ' '],
+    response_start_time: 1000,
+    data: { task: jsPsych.timelineVariable('dataName') }
+  };
+      
+  var attentioncheck = {
+    timeline: [blankspace, participantResponsecheck],
+    timeline_variables: [
+      {dataName: "Q1",
+        name1: "rjwirfn",
+        name2: "mlrtnwx",
+        job: "Please press the space bar."
+      }
+    ]
+  };
+  timeline.push(attentioncheck);
+
+  var reprobequestions = {
+    type: jsPsychSurveyHtmlForm,
+    html: `
+    <div style="max-width: 60vw;">  
+    <p>You will now get the opportunity to rethink the previous decisions you have made.</p>
+      <p>For each question, you will once again be shown the participant description and number of participants in each population group.</p>
+      <p>You will be given <strong>55 seconds</strong> to rethink each decision.</p>
+      <p>Please press "Continue" when you are ready to proceed.<p/></div>`,
+    button_label: "Continue",
+  };
+  timeline.push(reprobequestions);
 
     const reprobeprocedure = {
     timeline: [fixation, participantResponseReprobe],
@@ -757,6 +799,53 @@ function check_trial_null() {
   };
 
   timeline.push(CRT3);
+
+  /* define debriefing trial */
+  var debrief = {
+    type: jsPsychSurveyHtmlForm,
+    html: jsPsychSurveyHtmlForm,
+    html: `
+      <div class-"debriefFormDiv">
+        <p><strong>Study Title:</strong> Make Your Choice! A Fast-And-Slow Decision Task</p>
+        <p></p>
+        <p><strong>Name and Contact Information of Researchers:</strong> Emily Schwartz, Carleton University, Department of Psychology</p>
+        <p>Email: emilyschwartz@cmail.carleton.ca</p>
+        <p></p>
+        <Supervisor: Dr. Guy Lacroix, Carleton University, Department of Psychology</p>
+        <p>Email: guylacroix@cunet.carleton.ca</p>
+        <p></p>
+        <p><strong>What as the purpose of this research?</strong> Intuition describes a process of responding that occurs
+        nearly automatically, without conscious deliberation. This study investigated how the speed at which intuitive
+        responses are generated can influence decision-making. We are examining whether intuitive responses that are generated
+        more rapidly will be associated with greater retention of these responses when given the opportunity to rethink one's answer.
+        Through this research, we aim to shed light on the factors that influence one's decision to reject versus accept an
+        intuition following a period of reflection.</p>
+        <p></p>
+        <p><strong>Where can I learn more?</strong> You can google the terms "intuitive responding", "decoupling", "rationalization",
+        "decision-making", and "base-rate problems" to learn more. Below are some papers that you might find interesting:</p>
+        <p></p>
+        <p>Pennycook, G. (2023). A framework for understanding reasoning errors: From fake news to climate change and beyond. Advances in Experimental Social Psychology, 67, 131–208.</p>
+        <p></p>
+        <p>Pennycook, G., & Thompson, V. A. (2012). Reasoning with base rates is routine, relatively effortless, and context dependent. Psychonomic bulletin & review, 19(3), 528–534. https://doi.org/10.3758/s13423-012-0249-3</p>
+        <p></p>
+        <p>Walker, A. C., Turpin, M. H., Fugelsang, J. A., & Koehler, D. J. (2019). Intuition speed as a predictor of choice and confidence in point spread predictions. Judgment and Decision Making, 14(2), 148–155. doi:10.1017/S1930297500003387</p>
+        <p></p>
+        <p></strong>Is there anything I can do if I found this experiment to be emotionally upsetting?</strong> Yes.
+        If you feel any distress or anxiety after participating in this study, please feel free to contact the Carleton University Health
+        and Counselling Services at 613-520-6674, or the Distress Centre of Ottawa and Region at 613-238-3311 (https://www.dcottawa.on.ca).</p>
+        <p></p>
+        <p><strong>What if I have questions for later?</strong> If you have any remaining concerns, questions, or comments about
+        the experiment, please feel free to contact our principal investigator, Emily Schwartz (emilyschwartz@cmail.carleton.ca).</p>
+        <p></p>
+        <p><strong>Ethics Review:</strong> If you have any ethical concerns with the study, please contact the Carleton University
+        Research Ethics Board B (by phone at 613-520-2600 ext. 2517 or via email at ethics@carleton.ca).</p>
+        <p></p>
+        <p><strong>Thank you for participating in this research!</strong></p>
+        </div>
+        `,   
+  };
+
+  timeline.push(debrief);
 
   /* start the experiment */
   jsPsych.run(timeline);
