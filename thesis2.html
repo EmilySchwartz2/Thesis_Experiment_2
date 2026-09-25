@@ -588,8 +588,8 @@ function check_trial_null() {
   };
 
   timeline.push(experimentalprocedure);
-  
-    // Attention check
+
+  // Attention check
 
   // participant response with two options
 
@@ -607,9 +607,9 @@ function check_trial_null() {
     response_start_time: 1000,
     data: { task: jsPsych.timelineVariable('dataName') }
   };
-      
+
   var attentioncheck = {
-    timeline: [blankspace, participantResponsecheck],
+    timeline: [fixation, participantResponsecheck],
     timeline_variables: [
       {dataName: "Q1",
         name1: "rjwirfn",
@@ -618,6 +618,7 @@ function check_trial_null() {
       }
     ]
   };
+      
   timeline.push(attentioncheck);
 
   var reprobequestions = {
