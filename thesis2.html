@@ -67,13 +67,13 @@
         belong to. You will be given a brief description of Person A, in addition to
         the number of people found in each of the two groups. You will then be asked
         to state which group you believe Person A belongs to, based on the information
-        provided. You will be asked to make this decision within two seconds, based
+        provided. You will be asked to make this decision within five seconds, based
         on your first inclination. Following these base-rate problems, you will be asked
         to complete three logic problems. The entire session, including instructions, the
         base-rate task, and the logic questions, is expected to take approximately 30 minutes.</p>
         <p></p>
         <p><strong>Risks and Inconveniences:</strong> There will be no more risks than you would
-        otherwise encounter sitting in front of a computer for approxiimately 30 minutes. If at
+        otherwise encounter sitting in front of a computer for approximately 30 minutes. If at
         any point you feel discomfort, you may take breaks or withdraw from the study without penalty.</p>
         <p></p>
         <p><strong>Possible Benefits:</strong> You may not receive any direct benefit from your
@@ -91,8 +91,8 @@
         you choose to withdraw during the study, all information collected from you before your
         withdrawal will still be used. If you decide that you would like your data deleted, you may
         email the experimenters. This is possible up until the final day of the semester in which
-        you participated. For the fall semester, the last day to withdraw is December 5th, 2025. For
-        the winter semester, the last day to withdraw is April 8th, 2026.</p>
+        you participated. For the fall semester, the last day to withdraw is December 11th, 2026. For
+        the winter semester, the last day to withdraw is April 9th, 2027.</p>
         <p></p>
         <p><strong>Confidentiality:</strong> We will remove all identifying information from downloaded
         data as soon as possible, which will be after the semester in which you take place. We will treat
@@ -162,56 +162,6 @@
 
   timeline.push(consentForm);
 
-  /* Volume Check */
-
-//   var volumeup = {
-//     type: jsPsychHtmlKeyboardResponse,
-//     stimulus: `
-//     <p>Please turn the volume up on your computer.</p>
-//     <p>Click the icon below. Type the number that you hear.</p>
-//     <button id="playaudio" class="jspsych-btn jspsych-survey-html-form">🔊 Click Here</button>
-//     <audio src="audio/197014__margo_heston__seven-m.mp3"  controls class="audioPlayer" id="seven"></audio>
-//     `,
-//     on_load: function () {
-//       const playaudiobutton = document.getElementById('playaudio');
-
-//       // Enable the button only if both fields are valid
-//       function playthedamaudio(){
-//         event.preventDefault(); 
-//            const audio = document.getElementById("seven");
-//     audio.play();
-//       }
-
-//       function wrongkeyLOL() {
-// alert("You have pressed the wrong key. Please try again.");
-
-//       }
-
-
-
-//       // Listen for input changes
-//       playaudiobutton.addEventListener('click', playthedamaudio);
-
-//       document.onkeypress = function (e) {
-//         e = e || window.event;
-//         if (e.key != "7"){
-//           wrongkeyLOL();
-//         }
-
-//       }
-
-
-//     },
-
-//     on_finish: function (){
-
-// document.onkeypress = null;
-//     },
-
-//     choices: ['7']
-//   };
-//   timeline.push(volumeup)
-
   /* define first instructions trial */
   var instructions1 = {
     type: jsPsychSurveyHtmlForm,
@@ -257,44 +207,6 @@
     `,
   };
   timeline.push(instructions3)
-
-  // var instructions3 = {
-  //   type: jsPsychSurveyHtmlForm,
-  //   html: `
-  //   <p>The decision screen will look like this:<p/>
-  //   <img style=" border: 3px solid black;width:60vw;"src="img/examplepic.png" alt="Get Ready" />
-  //   <p>At each decision screen, you must provide a response within <strong>five seconds.</strong></p>
-  //   <button id="playaudio" class="jspsych-btn jspsych-survey-html-form">🔊 Click here to hear audio</button>
-  //   <audio src="audio/2second_ding_buzz.mp3"  controls class="audioPlayer" id="warningbeeps"></audio>
-  //   <br/>
-  //   `,
-  //   on_load: function () {
-  //     const playaudiobutton = document.getElementById('playaudio');
-
-  //     // Enable the button only if both fields are valid
-  //     function playthedamaudio(){
-  //       event.preventDefault(); 
-  //          const audio = document.getElementById("warningbeeps");
-  //   audio.play();
-  //     }
-
-  //     // Listen for input changes
-  //     playaudiobutton.addEventListener('click', playthedamaudio);
-  //   }
-
-  // };
-  // timeline.push(instructions3)
-
-  //   /* define fourth instructions trial */
-  // var instructions4 = {
-  //   type: jsPsychSurveyHtmlForm,
-  //   html: `
-  //       <p>Please respond based on your first inclination. <br/>
-  //       Do not spend too much time thinking about each decision.</p>
-  //     `,
-  //   button_label: "Continue"
-  // };
-  // timeline.push(instructions4);
 
   /* keyboard f and j */
 
@@ -422,13 +334,6 @@
         jsPsych.evaluateTimelineVariable('option2')
       );
     },
-    // on_load: function () {
-    //   // Wait 1 seconds after the trial loads, then play
-    //   setTimeout(() => {
-    //     const audio = document.getElementById("warningbeeps");
-    //     if (audio) audio.play();
-    //   }, 1000);
-    // },
 
     choices: ['f', 'j'],
     trial_duration: 5000,
@@ -558,7 +463,6 @@ function check_trial_null() {
 
   timeline.push(practiceprocedure);
 
-
   var realquestions = {
     type: jsPsychSurveyHtmlForm,
     html: `
@@ -571,7 +475,7 @@ function check_trial_null() {
   timeline.push(realquestions);
 
   const experimentalprocedure = {
-    timeline: [fixation, stereotype, baserate, participantResponse, timeout_conditional, participantResponseReprobe],
+    timeline: [fixation, stereotype, baserate, participantResponse, timeout_conditional],
     timeline_variables: [
       /* start of question 1 */
       {
@@ -685,6 +589,122 @@ function check_trial_null() {
   };
 
   timeline.push(experimentalprocedure);
+
+    const reprobeprocedure = {
+    timeline: [fixation, participantResponseReprobe],
+    timeline_variables: [
+      /* start of question 1 */
+      {
+        dataName: "expQ1",
+        baseRateText: `There are 4 men and 996 women.`,
+        stereotypeText: `This study contains men and women.<br/>Participant 1 is a randomly chosen participant of this study.<br/>Participant 1 is 23 years old and is finishing a degree in engineering.<br/>On Friday nights, Participant 1 likes to go out cruising with friends while listening to loud music and drinking beer.`,
+        option1: "Participant 1 is a man",
+        option2: "Participant 1 is a woman",
+      },
+      /* end of question 1 */
+      /* start of question 2 */
+      {
+        dataName: "expQ2",
+        baseRateText: `There are 5 engineers and 995 lawyers.`,
+        stereotypeText: `This study contains engineers and lawyers.<br/>Jack is a randomly chosen participant of this study.<br/>Jack is 36 years old.<br/>He is not married and somewhat introverted.<br/>He likes to spend his free time reading science fiction and writing computer programs.`,
+        option1: "Jack is an engineer",
+        option2: "Jack is a lawyer",
+      },
+      /* end of question 2 */
+      /* start of question 3 */
+      {
+        dataName: "expQ3",
+        baseRateText: `There are 995 participants who buy their clothes at high-end retailers, and 5 participants who buy their clothes at Wal-Mart.`,
+        stereotypeText: `This study contains participants who buy their clothes at high-end retailers and participants who buy their clothes at Wal-Mart.<br/>Karen is a randomly chosen participant of this study.<br/>Karen is a 33-year-old female.<br/>She works in a business office and drives a Porsche.<br/>She lives in a fancy penthouse with her boyfriend.`,
+        option1: "Karen buys her clothes at high-end retailers",
+        option2: "Karen buys her clothes at Wal-Mart",
+      },
+      /* end of question 3 */
+      /* start of question 4 */
+      {
+        dataName: "expQ4",
+        baseRateText: `There are 3 participants living in condos and 997 living in farmhouses.`,
+        stereotypeText: `This study contains people living in condos and people living in farmhouses.<br/>Kurt is a randomly chosen participant of this study.<br/>Kurt works on Wall Street and is single.<br/>He works long hours and wears Armani suits to work.<br/>He likes wearing shades.`,
+        option1: "Kurt lives in a condo",
+        option2: "Kurt lives in a farmhouse",
+      },
+      /* end of question 4 */
+      /* start of question 5 */
+      {
+        dataName: "expQ5",
+        baseRateText: `There are 997 girls and 3 boys.`,
+        stereotypeText: `This study contains girls and boys.<br/>Participant 2 is a randomly chosen participant of this study.<br/>Participant 2 is 13 years old.<br/>Participant 2's favourite subject is art.<br/>Participant 2's favourite things to do are shopping and having sleepovers with friends to gossip about other kids at school.`,
+        option1: "Participant 2 is a girl",
+        option2: "Participant 2 is a boy",
+      },
+      /* end of question 5 */
+      /* start of question 6 */
+      {
+        dataName: "expQ6",
+        baseRateText: `There are 997 nurses and 3 doctors.`,
+        stereotypeText: `This study contains nurses and doctors.<br/>Paul is a randomly chosen participant of this study.<br/>Paul is 34 years old.<br/>He lives in a beautiful home in a posh suburb.<br/>He is well spoken and very interested in politics.<br/>He invests a lot of time in his career.`,
+        option1: "Paul is a nurse",
+        option2: "Paul is a doctor",
+      },
+      /* end of question 6 */
+      /* start of question 7 */
+      {
+        dataName: "expQ7",
+        baseRateText: `There are 4 participants who prefer Star Trek, and 996 participants who prefer Days of Our Lives.`,
+        stereotypeText: `This study contains participants whose favourite series is Star Trek and participants whose favourite series is Days of Our Lives.<br/>Jeremy is a randomly chosen participant of this study.<br/>Jeremy is 26 and doing graduate studies in physics.<br/>He stays at home most of the time and likes to play video games.`,
+        option1: "Jeremy's favourite series is Star Trek",
+        option2: "Jeremy's favourite series is Days of Our Lives",
+      },
+      /* end of question 7 */
+      /* start of question 8 */
+      {
+        dataName: "expQ8",
+        baseRateText: `There are 997 participants who have tattoos and 3 participants who do not have tattoos.`,
+        stereotypeText: `This study contains people with and without tattoos.<br/>Jay is a randomly chosen participant of this study.<br/>Jay is a 29-year-old man.<br/>He has served a short time in prison.<br/>He has been living on his own for 2 years now.<br/>He has an older car and listens to punk music.`,
+        option1: "Jay has a tattoo",
+        option2: "Jay has no tattoo",
+      },
+      /* end of question 8 */
+      /* start of question 9 */
+      {
+        dataName: "expQ9",
+        baseRateText: `There are 996 kindergarten teachers and 4 executive managers.`,
+        stereotypeText: `This study contains kindergarten teachers and executive managers.<br/>Lilly is a randomly chosen participant of this study.<br/>Lilly is 37 years old.<br/>She is married and has 3 kids.<br/>Her husband is a veterinarian.<br/>She is committed to her family and always watches the daily cartoon shows with her kids.`,
+        option1: "Lilly is a kindergarten teacher",
+        option2: "Lilly is an executive manager",
+      },
+      /* end of question 9 */
+      /* start of question 10 */
+      {
+        dataName: "expQ10",
+        baseRateText: `There are 4 Bruce Springsteen fans and 996 Britney Spears fans.`,
+        stereotypeText: `This study contains Bruce Springsteen fans and Britney Spears fans.<br/>Tara is a randomly chosen participant of this study.<br/>Tara is 15.<br/>She loves to go shopping at the mall and to talk with her friends about their crushes at school.`,
+        option1: "Tara is a Bruce Springsteen fan",
+        option2: "Tara is a Britney Spears fan",
+      },
+      /* end of question 10 */
+      /* start of question 11 */
+      {
+        dataName: "expQ11",
+        baseRateText: `There are 5 sixteen-year-olds and 995 fifty-year-olds.`,
+        stereotypeText: `This study contains sixteen-year-olds and fifty-year-olds.<br/>Ellen is a randomly chosen participant of this study.<br/>Ellen likes to listen to hip hop and rap music.<br/>She enjoys wearing tight shirts and jeans.<br/>She's fond of dancing and has a small nose piercing.`,
+        option1: "Ellen is sixteen",
+        option2: "Ellen is fifty",
+      },
+      /* end of question 11 */
+      /* start of question 12*/
+      {
+        dataName: "expQ12",
+        baseRateText: `There are 5 Americans and 995 French people.`,
+        stereotypeText: `This study contains Americans and French people.<br/>Martine is a randomly chosen participant of this study.<br/>Martine is 26 years old.<br/>She is bilingual and reads a lot in her spare time.<br/>She is a very fashionable dresser and great cook.`,
+        option1: "Martine is American",
+        option2: "Martine is French",
+      },
+      /* end of question 12 */
+    ]
+  };
+
+  timeline.push(reprobeprocedure);
 
   // Cognitive Reflection Test
 
