@@ -267,7 +267,7 @@
   // participant response with two options
   const participantResponseTemplate = (option1, option2) => `
   <div style="font-size:30px;">
-    <img src="img/5scountdowncut.gif" alt="Get Ready" style="width:15vw;"/>
+    <img src="img/5scountdowncut.gif" alt="Get Ready" style="width:5vw;"/>
     <p>What is most likely?</p>
     <table class="participantResponseTable">
       <tr>
@@ -481,8 +481,8 @@ function check_trial_null() {
         dataName: "expQ1",
         baseRateText: `There are 4 men and 996 women.`,
         stereotypeText: `This study contains men and women.<br/>Participant 1 is a randomly chosen participant of this study.<br/>Participant 1 is 23 years old and is finishing a degree in engineering.<br/>On Friday nights, Participant 1 likes to go out cruising with friends while listening to loud music and drinking beer.`,
-        option1: "Participant 1 is a man",
-        option2: "Participant 1 is a woman",
+        option1: "Participant 1 is a woman",
+        option2: "Participant 1 is a man",
       },
       /* end of question 1 */
       /* start of question 2 */
@@ -508,8 +508,8 @@ function check_trial_null() {
         dataName: "expQ4",
         baseRateText: `There are 3 participants living in condos and 997 living in farmhouses.`,
         stereotypeText: `This study contains people living in condos and people living in farmhouses.<br/>Kurt is a randomly chosen participant of this study.<br/>Kurt works on Wall Street and is single.<br/>He works long hours and wears Armani suits to work.<br/>He likes wearing shades.`,
-        option1: "Kurt lives in a condo",
-        option2: "Kurt lives in a farmhouse",
+        option1: "Kurt lives in a farmhouse",
+        option2: "Kurt lives in a condo",
       },
       /* end of question 4 */
       /* start of question 5 */
@@ -517,8 +517,8 @@ function check_trial_null() {
         dataName: "expQ5",
         baseRateText: `There are 997 girls and 3 boys.`,
         stereotypeText: `This study contains girls and boys.<br/>Participant 2 is a randomly chosen participant of this study.<br/>Participant 2 is 13 years old.<br/>Participant 2's favourite subject is art.<br/>Participant 2's favourite things to do are shopping and having sleepovers with friends to gossip about other kids at school.`,
-        option1: "Participant 2 is a girl",
-        option2: "Participant 2 is a boy",
+        option1: "Participant 2 is a boy",
+        option2: "Participant 2 is a girl",
       },
       /* end of question 5 */
       /* start of question 6 */
@@ -584,7 +584,8 @@ function check_trial_null() {
         option2: "Martine is French",
       },
       /* end of question 12 */
-    ]
+    ],
+   randomize_order: true // <-- Activates simple randomization    
   };
 
   timeline.push(experimentalprocedure);
@@ -593,13 +594,27 @@ function check_trial_null() {
 
   // participant response with two options
 
+  // participant response with two options
+  const attentioncheckTemplate = (option1, option2) => `
+  <div style="font-size:30px;">
+    <img src="img/5scountdowncut.gif" alt="Get Ready" style="width:5vw;"/>
+    <p>What is most likely?</p>
+    <table class="participantResponseTable">
+      <tr>
+        <td><span class="participantResponseKeyNudge">(Press the space bar)</span></td>
+      </tr>
+    </table>
+  </div>
+  <audio id="warningbeeps"
+            src="audio/2second_ding_buzz.mp3"
+            class="audioPlayer"></audio>
+`;
+
   var participantResponsecheck = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function () {
-      return participantResponseTemplate(
-        jsPsych.evaluateTimelineVariable('job'),  
-        jsPsych.evaluateTimelineVariable('name1'),
-        jsPsych.evaluateTimelineVariable('name2')  
+      return attentioncheckTemplate(
+        jsPsych.evaluateTimelineVariable('job')  
       );
     },
       
@@ -612,8 +627,6 @@ function check_trial_null() {
     timeline: [fixation, participantResponsecheck],
     timeline_variables: [
       {dataName: "Q1",
-        name1: "rjwirfn",
-        name2: "mlrtnwx",
         job: "Please press the space bar."
       }
     ]
@@ -633,7 +646,7 @@ function check_trial_null() {
   };
   timeline.push(reprobequestions);
 
-    const reprobeprocedure = {
+  const reprobeprocedure = {
     timeline: [fixation, participantResponseReprobe],
     timeline_variables: [
       /* start of question 1 */
@@ -641,8 +654,8 @@ function check_trial_null() {
         dataName: "expQ1",
         baseRateText: `There are 4 men and 996 women.`,
         stereotypeText: `This study contains men and women.<br/>Participant 1 is a randomly chosen participant of this study.<br/>Participant 1 is 23 years old and is finishing a degree in engineering.<br/>On Friday nights, Participant 1 likes to go out cruising with friends while listening to loud music and drinking beer.`,
-        option1: "Participant 1 is a man",
-        option2: "Participant 1 is a woman",
+        option1: "Participant 1 is a woman",
+        option2: "Participant 1 is a man",
       },
       /* end of question 1 */
       /* start of question 2 */
@@ -668,8 +681,8 @@ function check_trial_null() {
         dataName: "expQ4",
         baseRateText: `There are 3 participants living in condos and 997 living in farmhouses.`,
         stereotypeText: `This study contains people living in condos and people living in farmhouses.<br/>Kurt is a randomly chosen participant of this study.<br/>Kurt works on Wall Street and is single.<br/>He works long hours and wears Armani suits to work.<br/>He likes wearing shades.`,
-        option1: "Kurt lives in a condo",
-        option2: "Kurt lives in a farmhouse",
+        option1: "Kurt lives in a farmhouse",
+        option2: "Kurt lives in a condo",
       },
       /* end of question 4 */
       /* start of question 5 */
@@ -677,8 +690,8 @@ function check_trial_null() {
         dataName: "expQ5",
         baseRateText: `There are 997 girls and 3 boys.`,
         stereotypeText: `This study contains girls and boys.<br/>Participant 2 is a randomly chosen participant of this study.<br/>Participant 2 is 13 years old.<br/>Participant 2's favourite subject is art.<br/>Participant 2's favourite things to do are shopping and having sleepovers with friends to gossip about other kids at school.`,
-        option1: "Participant 2 is a girl",
-        option2: "Participant 2 is a boy",
+        option1: "Participant 2 is a boy",
+        option2: "Participant 2 is a girl",
       },
       /* end of question 5 */
       /* start of question 6 */
